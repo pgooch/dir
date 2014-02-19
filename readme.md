@@ -6,10 +6,10 @@ The server must support .htaccess rewrites and have image GD installed. This has
 ### Setup
 To install DIV you will need to move both `_resizer.php` and `.htaccess` to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you will also want to look through the options in `_resizer.php` to adjust them to your liking. 
 
--`default_reize` sets the default resizing method if one is not passed in the URL, these methods are described in the user section below. 
--`images_directory` The directory your using for images, which should be the same directory the `_resizer.php` is in.
--`cache_directory` The location the script will store cached images. If the directory can not be found it will attempt to create it. This directory will need write permissions.
--`enable_retina_support` Sets whether or not to check for the cookie to change images resizing based on pixel ratio.
+- `default_reize` sets the default resizing method if one is not passed in the URL, these methods are described in the user section below. 
+- `images_directory` The directory your using for images, which should be the same directory the `_resizer.php` is in.
+- `cache_directory` The location the script will store cached images. If the directory can not be found it will attempt to create it. This directory will need write permissions.
+- `enable_retina_support` Sets whether or not to check for the cookie to change images resizing based on pixel ratio.
 
 If you want to support HiDpi devices you will need to include the div.js script on the page, preferably at the top where it will be able to run before loading any images. This is mere 189bytes and can be concatenated into other scrips. **Note:** if you leave `enable_retina_support` enabled you will need to remember to give all images set widths and/or heights, otherwise when a retina user comes along and loads the images thats twice as big the browser will attempt to display it at that size, potentially breaking layouts (and generally making things look a mess).
 
