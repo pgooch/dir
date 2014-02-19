@@ -18,13 +18,13 @@ After setup you can continue to use the image directory as normal. When you want
 
 http://www.myawesomesite.com/images/cool-stuffs/my-slightly-to-large-image.png  
 would become  
-http://www.myawesomesite.com/images/_200x200n_/cool-stuffs/my-slightly-to-large-image.png
+http://www.myawesomesite.com/images/200x200n/cool-stuffs/my-slightly-to-large-image.png
 
 or, if using a remote image
 
 http://www.myawesomesite.com/images/http://www.someoneelsesalmostasawesomesite.com/their-images/something-cool.jpg  
 would become  
-http://www.myawesomesite.com/images/*200x200n*/http://www.someoneelsesalmostasawesomesite.com/their-images/something-cool.jpg
+http://www.myawesomesite.com/images/200x200n/http://www.someoneelsesalmostasawesomesite.com/their-images/something-cool.jpg
 
 The formatting for the pseudo directory is `desired_width` x `desired_height` `resize_method`. Either `desired_width` or `desired_height` can be changed out to _auto_, in which case it will only use the remaining dimension when calculating size. The `resizing_method` can be one of the following:
 
