@@ -29,7 +29,7 @@ http://www.myawesomesite.com/images/http://www.someoneelsesalmostasawesomesite.c
 would become  
 http://www.myawesomesite.com/images/200x200n/http://www.someoneelsesalmostasawesomesite.com/their-images/something-cool.jpg
 
-The formatting for the pseudo directory is `desired_width` x `desired_height` `resize_method`. Either `desired_width` or `desired_height` can be changed out to _auto_, in which case it will only use the remaining dimension when calculating size. The `resizing_method` can be one of the following:
+The formatting for the pseudo directory is `desired_width` x `desired_height` `resize_method`. The `resizing_method` can be one of the following:
 
 - d : Distort - Distorts the image so it fits exactly in the desired dimensions.
 - p : Padding - Adds a padding around the image so that it is constrained within the desired dimensions and has the exact same final dimensions as desired.
@@ -44,6 +44,9 @@ Image formats for resized images default to JPEG unless the source image was a P
 If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com) and I'll try to help you the best I can.
 
 ### Version History
+##### 1.0.2
+- Minor change to support spaces in file names (even though there probably shouldn't be spaces in your file names),
+
 ##### 1.0.1
 - Fixed a minor issue that would break compatibility of older version of PHP.
 - Added an example page link and fixed the email link

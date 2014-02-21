@@ -23,6 +23,7 @@ define('enable_retina_support',true);// If set to true and the JavaScript is use
 // Determine the mod string (if there is one) and the image
 $image = explode(images_directory,$_SERVER['REQUEST_URI'],2);
 $image = ltrim($image[1],'/');
+$image = urldecode($image);
 list($mod,$image)=explode('/',$image.'/',2);
 if(preg_match('~([0-9]+)?x([0-9]+)?([dcpn])?~',$mod)===0){
 	// That does not appear to be a valid mod string, we will assume it's an unmodified image and will not do anything.
