@@ -32,14 +32,14 @@ http://www.myawesomesite.com/images/200x200n/http://www.someoneelsesalmostasawes
 The formatting for the pseudo directory is `desired_width` x `desired_height` `resize_method`. Either `desired_width` or `desired_height` can be changed out to _auto_, in which case it will only use the remaining dimension when calculating size. The `resizing_method` can be one of the following:
 
 - d : Distort - Distorts the image so it fits exactly in the desired dimensions.
-- p : Padding - Adds a transparent padding around the image so that it is constrained within the desired dimensions and has the exact same final dimensions as desired.
+- p : Padding - Adds a padding around the image so that it is constrained within the desired dimensions and has the exact same final dimensions as desired.
 - n : Nearest - Scales the image so that it fits within the desired dimensions, but does not add any padding to the image, so only the width or height will be exactly the desired dimensions (unless the ratio is the same).
 - c : Crop - The default method, this will resize the image to fit as much as possible in the desired dimensions, keeping the center intact and trimming excess if needed.
 
 ### Outputs
 The reizer will save a copy of the file locally and output one to the browser. The local file will be used for subsequent calls to that image unless the image has been changed (checked with a simple md5 comparison). This local file will be located in the specified cache directory and can be cleared at any time.
 
-Image formats for resized images default to JPEG unless the source image was a PNG or a GIF, or the Padding resize method was selected, in which case the output will be PNG. A limitation of the resizer is that animated only resize the first frame.
+Image formats for resized images default to JPEG unless the source image was a PNG or a GIF, in which case the output will be PNG. A limitation of the resizer is that animated only resize the first frame.
 
 If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com) and I'll try to help you the best I can.
 
@@ -47,5 +47,6 @@ If an image fails to load opening just the image in a new tab may give an error 
 ##### 1.0.1
 - Fixed a minor issue that would break compatibility of older version of PHP.
 - Added an example page link and fixed the email link
+
 ##### 1.0.0
 - Initial Release
