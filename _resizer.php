@@ -21,7 +21,8 @@ define('cache_directory','./_cache');// All resized images will be cached here, 
 define('enable_retina_support',true);// If set to true and the JavaScript is used it will multiply the image sizes by the pixelRation of the target device, and cache a second copy at that ratio
 
 // Determine the mod string (if there is one) and the image
-$image = ltrim(explode(images_directory,$_SERVER['REQUEST_URI'],2)[1],'/');
+$image = explode(images_directory,$_SERVER['REQUEST_URI'],2);
+$image = ltrim($image[1],'/');
 list($mod,$image)=explode('/',$image.'/',2);
 if(preg_match('~([0-9]+)?x([0-9]+)?([dcpn])?~',$mod)===0){
 	// That does not appear to be a valid mod string, we will assume it's an unmodified image and will not do anything.

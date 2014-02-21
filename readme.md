@@ -3,6 +3,9 @@
 ### Requirements
 The server must support .htaccess rewrites and have image GD installed. This has only been tested with PHP 5.4.X, but is likely to work with older versions.
 
+### Example
+You can see an example of the resizer working right here: [http://fatfolderdesign.com/examples/directory-image-resizer/](http://fatfolderdesign.com/examples/directory-image-resizer/)
+
 ### Setup
 To install DIV you will need to move both `_resizer.php` and `.htaccess` to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you will also want to look through the options in `_resizer.php` to adjust them to your liking. 
 
@@ -38,8 +41,11 @@ The reizer will save a copy of the file locally and output one to the browser. T
 
 Image formats for resized images default to JPEG unless the source image was a PNG or a GIF, or the Padding resize method was selected, in which case the output will be PNG. A limitation of the resizer is that animated only resize the first frame.
 
-If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](phillip.gooch@gmail.com) and I'll try to help you the best I can.
+If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com) and I'll try to help you the best I can.
 
 ### Version History
+##### 1.0.1
+- Fixed a minor issue that would break compatibility of older version of PHP.
+- Added an example page link and fixed the email link
 ##### 1.0.0
 - Initial Release
