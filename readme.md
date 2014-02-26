@@ -37,15 +37,18 @@ The formatting for the pseudo directory is `desired_width` x `desired_height` `r
 - c : Crop - The default method, this will resize the image to fit as much as possible in the desired dimensions, keeping the center intact and trimming excess if needed.
 
 ### Outputs
-The reizer will save a copy of the file locally and output one to the browser. The local file will be used for subsequent calls to that image unless the image has been changed (checked with a simple md5 comparison). This local file will be located in the specified cache directory and can be cleared at any time.
+The resizer will save a copy of the file locally and output one to the browser. The local file will be used for subsequent calls to that image unless the image has been changed (checked with a simple md5 comparison). This local file will be located in the specified cache directory and can be cleared at any time.
 
-Image formats for resized images default to JPEG unless the source image was a PNG or a GIF, in which case the output will be PNG. A limitation of the resizer is that animated only resize the first frame.
+Image formats for resized images default to JPEG unless the source image was a PNG or a GIF or the padding resizing method was used, in which case the output will be PNG. A limitation of the resizer is that animated only resize the first frame.
 
 If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com) and I'll try to help you the best I can.
 
 ### Version History
+##### 1.0.3
+- When adding padding to an image it is now transparent, and the file saved as a PNG.
+
 ##### 1.0.2
-- Minor change to support spaces in file names (even though there probably shouldn't be spaces in your file names),
+- Minor change to support spaces in file names (even though there probably shouldn't be spaces in your file names).
 
 ##### 1.0.1
 - Fixed a minor issue that would break compatibility of older version of PHP.

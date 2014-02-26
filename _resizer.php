@@ -195,7 +195,7 @@ if(isset($mod)){
 
 		// Save that image! (if it's supposed to)
 		imagesavealpha($new_image,true);
-		if($img_mime=='image/png' || $img_mime=='image/gif'){
+		if($img_mime=='image/png' || $img_mime=='image/gif'||$mod_type=='p'){
 			imagepng($new_image,$cached_path);
 			$img_mime='image/png';
 		}else{
