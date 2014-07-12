@@ -65,7 +65,6 @@
 		<p>In addition to resizing however you like Directory Image Resizer also caches resized images to save time. The cache image will always be loaded unless it's source has changed, which is checked with a simple MD5 comparison. Other features include support for HiDpi Devices with a tiny bit of javascript to get the users Pixel Ratio. One thing to remember is that if you are using the retina support your going to have to give your images a width and/or height so they don't go all out of proportion and mess things up, but your doing that already right?</p>
 		<p>If you want to use the Directory Image Resizer, read more about it in it's real documentation, or just want to poke around it's insides, you can find it <a href="https://github.com/pgooch/dir" target="_blank">right here on GitHub</a>.</p>
 		<div class="footer">
-			Last Updated February 18th, 2014<br/>
 			<a href="mailto:phillip.gooch@gmail.com">phillip.gooch@gmail.com</a>
 		</div>
 	</div>
