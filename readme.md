@@ -7,7 +7,7 @@ The server must support .htaccess rewrites and have image GD installed. This has
 You can see an example of the resizer working right here: [http://fatfolderdesign.com/examples/directory-image-resizer/](http://fatfolderdesign.com/examples/directory-image-resizer/)
 
 ### Setup
-To install DIV you will need to move both `_resizer.php` and `.htaccess` to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you will also want to look through the options in `_resizer.php` to adjust them to your liking. 
+To install DIV you will need to move both `_resizer.php` and `.htaccess` located in the images directory to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you will also want to look through the options in `_resizer.php` to adjust them to your liking. 
 
 - `default_reize` sets the default resizing method if one is not passed in the URL, these methods are described in the user section below. 
 - `images_directory` The directory your using for images, which should be the same directory the `_resizer.php` is in.
@@ -45,6 +45,9 @@ Image formats for resized images default to JPEG unless the source image was a P
 If an image fails to load opening just the image in a new tab may give an error message explaining why. If you still receive a broken image commenting out the output lines (lines 210 and 211 at time of writing) will display some additional information that may help debug the problem. If the problem still isn't clear you can contact me at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com) and I'll try to help you the best I can.
 
 ### Version History
+##### 1.1.1
+- Added a check to prevent it from caching images that failed to save (effectively caching the missing image)
+
 ##### 1.1.0
 - Rewrote script to try and minimize unnecessary processing. 
 - Implemented browser side caching and improved cache detection.

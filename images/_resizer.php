@@ -196,15 +196,20 @@ if(isset($mod)){
 		// Save that image! (if it's supposed to)
 		imagesavealpha($new_image,true);
 		if($img['mime']=='image/png' || $img['mime']=='image/gif'|| $mod['t']=='p'){
-			imagepng($new_image,$cached_path);
+			@imagepng($new_image,$cached_path);
 			$img['mime']='image/png';
 		}else{
-			imagejpeg($new_image,$cached_path,51);
+			@imagejpeg($new_image,$cached_path,51);
 			$img['mime']='image/jpeg';
 		}
 		// Now that it's saved it can reference the cached copy.
 		$image = $cached_path;
 	}
+}
+// Check if the image is there, if not then it failed to save it, have it error and exit out.
+if(!is_file($image)){
+	echo 'Unable to find the cached image copy, does the cache directory have write access?.';
+	exit;
 }
 // Output all the headers and image data
 header("Last-Modified: ".gmdate("D, d M Y H:i:s",$img['modified'])." GMT");
@@ -229,5 +234,4 @@ if(@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])==$img['modified'] || @trim($_S
 }
 header('Content-Type: '.$img['mime']);
 readfile($image);
-
 // Goodbye, and that you for using the Directory Image Resizer
