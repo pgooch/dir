@@ -14,6 +14,7 @@ To install DIR you will need to move both `_resizer.php` and `.htaccess` to your
 - **`cache_directory`** The location the script will cache images. If the directory cannot be found it will attempt to create it. This directory will need write permissions.
 - **`thumbnail_file_extension`** The file extension for cached files. If set to `true` the proper extension for the images mime type will be used. If a string is passed that will be used. Settings this to `false` omit the file extension completely.
 - **`enable_retina_support`** Sets whether or not to check for the cookie to change images resizing based on pixel ratio. The included `div.js` will need to be included on the page for this feature to work.
+- **`resize_fuzziness_factor`** Determines how much distortion is allowed when resizing. Takes a floating value between 0 and 1 representing the percentage of distortion allowed. To keep old functionality or disable distortion, set to 0. To force distortion on all images set it to 1. Defaults to 0.11 (or 11%).
 - **`show_debug`** Will stop normal functionality and instead display debug information when loading an image directly. This can be useful if you are unable to determine why an image is not resizing properly.
 
 If you want to support HiDPI devices you will need to include the `dir.js` script on the page, preferably at the top where it will be able to run before loading any images. This is mere 197bytes and can be concatenated into other scrips. _**Note:** if you leave `enable_retina_support` enabled and include this script you will need to remember to give all images a set width and/or height, otherwise HiDPI users will load larger images that could break site layout (or at the very least make things look bad)._
@@ -51,6 +52,7 @@ For further support leave a GitHub issue or contact me directly at [phillip.gooc
 ##### 1.2.2
 - Changed the script from div.js to dir.js, and changed other references to dir.js (not sure where my wires got crossed there).
 - Updated the dir.js to include a designated path, preventing it from creating multiple cookies when one 1 is needed.
+- Added the resize_fuzziness_factor option allowing it to distort things just a little bit. 
 
 ##### 1.1.1
 - Added a check to prevent it from caching images that failed to save (effectively caching the missing image)
