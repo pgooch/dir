@@ -19,6 +19,7 @@ define('default_resize','c');
 define('images_directory',basename(__DIR__));
 define('cache_directory','./_cache');// If the directory is not found it will attempt to create it
 define('enable_retina_support',true);// Requires the included javascript to be added to the page.
+define('resize_fuzziness_factor',0.11);// The amount it of distortion allowed when resizing, a percentage between 0 and 1
 define('thumbnail_file_extension',true);
 define('show_debug',false);// This will prevent the image from loading 
 
@@ -119,7 +120,15 @@ if(isset($mod)){
 		$image = $cached_path;
 	}else{
 		// Bad news, we gotta make that image
-		// First lets do all the math needed to make the resize
+		// First, lets check the ratios, see if it's within the distortion fuzziness factor.
+		$image_ratio = $img['w']/$img['h'];
+		$ideal_ratio = $mod['w']/$mod['h'];
+		$ratio_diff = abs($image_ratio-$ideal_ratio);
+		if($ratio_diff<=resize_fuzziness_factor){
+			// So it is getting distorted, we can change the bot type to "d";
+			$mod['t'] = 'd';
+		}
+		// Lets do all the math needed to make the resize
 		switch($mod['t']){
 			case 'd': // Distort, mangles the image until it fits into the box.
 				$resize = array(

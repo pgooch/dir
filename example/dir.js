@@ -3,4 +3,4 @@ document.cookie='dir='+escape(JSON.stringify({
 	'screenWidth':screen.width,
 	'screenHeight':screen.height,
 	'dirVersion':1
-}))+'; expires=2147483647';
+}))+'; path=/; expires=2147483647';

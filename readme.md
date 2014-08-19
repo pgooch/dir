@@ -1,4 +1,4 @@
-# DIV - The Directory Image Resizer
+# DIR - The Directory Image Resizer
 
 ### Requirements
 The server must support .htaccess rewrites and have image GD installed. This has only been tested with PHP 5.4.X, but is likely to work with older versions.
@@ -7,7 +7,7 @@ The server must support .htaccess rewrites and have image GD installed. This has
 You can copy the `example` directory to the server to create a simple example of the script (although you may need to adjust permissions of the caching directory). An example is also available online at [http://phillipgooch.com/github-examples/dir/](http://phillipgooch.com/github-examples/dir/). _Please note the online example may not be completely up-to-date._
 
 ### Setup
-To install DIV you will need to move both `_resizer.php` and `.htaccess` to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you may also want to look through the options in `_resizer.php` to adjust them to your liking. 
+To install DIR you will need to move both `_resizer.php` and `.htaccess` to your intended image directory. Give the directory write permissions or create the intended caching directory and give that write permissions. Before running the script you may also want to look through the options in `_resizer.php` to adjust them to your liking. 
 
 - **`default_reize`** Sets the default resizing method if one is not passed in the URL, these methods are described in the usage section below. 
 - **`images_directory`** The directory your using for images, which most likely will be the same directory the `_resizer.php` is in.
@@ -16,7 +16,7 @@ To install DIV you will need to move both `_resizer.php` and `.htaccess` to your
 - **`enable_retina_support`** Sets whether or not to check for the cookie to change images resizing based on pixel ratio. The included `div.js` will need to be included on the page for this feature to work.
 - **`show_debug`** Will stop normal functionality and instead display debug information when loading an image directly. This can be useful if you are unable to determine why an image is not resizing properly.
 
-If you want to support HiDPI devices you will need to include the `div.js` script on the page, preferably at the top where it will be able to run before loading any images. This is mere 189bytes and can be concatenated into other scrips. _**Note:** if you leave `enable_retina_support` enabled and include this script you will need to remember to give all images a set width and/or height, otherwise HiDPI users will load larger images that could break site layout (or at the very least make things look bad)._
+If you want to support HiDPI devices you will need to include the `dir.js` script on the page, preferably at the top where it will be able to run before loading any images. This is mere 197bytes and can be concatenated into other scrips. _**Note:** if you leave `enable_retina_support` enabled and include this script you will need to remember to give all images a set width and/or height, otherwise HiDPI users will load larger images that could break site layout (or at the very least make things look bad)._
 
 ### Usage
 After setup you can continue to use the image directory as normal. When you want to adjust the size of the image you can place the modification pseudo directory before the image path. For example:
@@ -48,6 +48,10 @@ If an image fails to load opening just the image in a new tab may give an error 
 For further support leave a GitHub issue or contact me directly at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com).
 
 ### Version History
+##### 1.2.2
+- Changed the script from div.js to dir.js, and changed other references to dir.js (not sure where my wires got crossed there).
+- Updated the dir.js to include a designated path, preventing it from creating multiple cookies when one 1 is needed.
+
 ##### 1.1.1
 - Added a check to prevent it from caching images that failed to save (effectively caching the missing image)
 

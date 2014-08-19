@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Directory Image Resizer</title>
-	<script type="text/javascript" src="./div.js"></script>
+	<script type="text/javascript" src="./dir.js"></script>
 	<link rel="stylesheet" href="./example.css" />
 </head>
 <body>
@@ -52,7 +52,28 @@
 			<img src="./images/600x600n/http://i.imgur.com/5bMbobU.jpg" alt="Cute Puppies Nearest" width="600px"/>
 			<a href="./images/600x600n/http://i.imgur.com/5bMbobU.jpg">./images/<span>600x600n</span>/http://i.imgur.com/5bMbobU.jpg</a>
 		</div>
-		<p>Excellent. But what about images with transparencies you ask, well look at fry, just to give someone some money.</p>
+		<p>Excellent. But sometimes the image is only a little bit off the dimensions you want, and a little bit of distortion isn't a big deal right? We have a "fuzziness-factor" programmed in for that. it defaults to 10% but can be adjusted in the resize script. Lets see how that works, we have two examples below.</p>
+		<div class="image">
+			<img src="./images/little-bit-taller.jpg" alt="Running Water"/>
+			Little bit Taller
+		</div>
+		<br/><br/>
+		<div class="image">
+			<img src="./images/little-bit-wider.jpg" alt="Desert Mountians"/>
+			Little bit Wider
+		</div>
+		<p>Those are both just a tad under 10% larger one direction than the other, by default the "fuzziness-factor" is 11%, so when we try and turn them into perfect squares they will get distorted to do so, it's just a little bit, so it's hardly noticeable.</p>
+		<div class="type">
+			<div class="image">
+				<img src="./images/455x455/little-bit-taller.jpg" alt="Running Water" width="455px" height="455px" />
+				No Longer Taller
+			</div>
+			<div class="image">
+				<img src="./images/455x455/little-bit-wider.jpg" alt="Desert Mountians" width="455px" height="455px" />
+				No Longer Wider
+			</div>
+		</div>
+		<p>But what about images with transparencies you ask, well look at fry, just to give someone some money.</p>
 		<div class="image">
 			<img src="./images/trans-bg.png" alt="Take Fry's Money" width="1000px" />
 			<a href="./images/trans-bg.png">./images/trans-bg.png</a>
