@@ -73,6 +73,26 @@
 				No Longer Wider
 			</div>
 		</div>
+		<p>You can also use the images original size as a value when giving the image a new size. This is good for things like banners, lets say you want a banner thans 500px wide, but don't really care about the height. can pass it a value like <span>500xan</span> where a is the automatically calculated height of the image and n sets it to the nearest image size possible. This will resize the iamge to be 500px wide and whatever that would need to be in height in order to contain the whole thing. Lets use this image as an example</p>
+		<div class="image">
+			<img src="./images/crossroad.jpg" alt="Crossroads" width="1000px" />
+			<a href="./images/crossroad.jpg">./images/crossroad.jpg</a>, 1000px by 562px
+		</div>
+		<p>We can turn it into a 500px by whatever it needs to be banner like this</p>
+		<div class="image">
+			<img src="./images/500xan/crossroad.jpg" alt="Crossroads" width="500px" />
+			<a href="./images/500xan/crossroad.jpg">./images/500xan/crossroad.jpg</a>
+		</div>
+		<p>Passing the height as a (for <u>a</u>uto) and setting to output the image using the nearest resizing method we created a banner of variable height as needed. You can then give thid iamge a width alone letting the image resize vertically as needed (and horizntally in the case of HiDPI support). You can also replace the vertical size with a for the same effect vertically.</p>
+		<div class="image">
+			<img src="./images/ax250n/crossroad.jpg" alt="Crossroads" height="250px" />
+			<a href="./images/ax250n/crossroad.jpg">./images/ax250n/crossroad.jpg</a>
+		</div>
+		<p>If you looking for a large backgroud image you can also use the letter "f" for full-screen sizing. This will use the users <em>screen</em> dismensions. This is used as opposed to the viewport dimensions so that if the browser window is resized the image will still look as shark and as crisp as possible. With this any image can be used as a size appropriate splash image. For example the below image should be the same size as your screens resolution, complete with DPI adjustments. <em>Note: The iamges displayed on this page are scaled to fit, click the link below the image to get the full size version. Additionally the source image is rather large, if the iamge did not load try vewing it another tab to ensure it did not run out of memory while attempting to resize it.</em>
+		<div class="image">
+			<img src="./images/fxf/vegetables.jpg" alt="Vegetables" width="1000px" />
+			<a href="./images/fxf/vegetables.jpg">./images/fxf/vegetables.jpg</a>
+		</div>
 		<p>But what about images with transparencies you ask, well look at fry, just to give someone some money.</p>
 		<div class="image">
 			<img src="./images/trans-bg.png" alt="Take Fry's Money" width="1000px" />

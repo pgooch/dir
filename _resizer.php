@@ -31,7 +31,7 @@ $image = ltrim($image[1],'/');
 $image = urldecode($image);
 list($mod,$image)=explode('/',$image.'/',2);
 
-if(preg_match('~([0-9]+)x([0-9]+)([dcpn])?~',$mod)===0){
+if(preg_match('~([0-9]+|a|f)x([0-9]+|a|f)([dcpn])?~',$mod)===0){
 	// That does not appear to be a valid mod string, we will assume it's an unmodified image and will not do anything.
 	$image = $mod.'/'.$image;
 	unset($mod); //Cleanup, and it's used later via isset check
@@ -84,11 +84,25 @@ if($img['location']=='local'){
 	$img['modified'] = substr(preg_replace('~[^0-9]~','',$img['md5']).'0123456789',0,10); // 0-10 is a safety in case the md5 is somehow all letters.
 }
 
+// Get the cookie or make a fake one
+if(isset($_COOKIE['dir'])){
+	$cookie = json_decode($_COOKIE['dir'],true);
+	$cookie['lastPixelRatioUpdate'] = floor($cookie['lastPixelRatioUpdate']/1000);
+}else{
+	$cookie = array(
+		'pixelRatio' => 1,
+		'lastPixelRatioUpdate' => -1,
+		'screenWidth' => 1920,
+		'screenHeight' => 1080,
+		'dirVersion' => 2
+	);
+}
+
 // If we have a mod string there is a lot to do, otherwise we can simply just use the image as is.
 if(isset($mod)){
 
 	// Mangle the mod into it's usable parts
-	preg_match_all('~([0-9]+)?x([0-9]+)?([dcpn])?~',$mod,$size);
+	preg_match_all('~([0-9]+|a|f)?x([0-9]+|a|f)?([dcpn])?~',$mod,$size);
 	$mod = array(
 		'w' => $size[1][0], // Width
 		'h' => $size[2][0], // Height
@@ -96,14 +110,29 @@ if(isset($mod)){
 	);
 	unset($size); // Cleanup
 
+	// Figure out the [a]uto and [f]ullsize vars
+	foreach($mod as $k => $v){
+		if($k!='t'){
+			switch($v){
+				// A for Auto
+				case 'a':
+					$mod[$k] = $img[$k];
+				break;
+				case 'f':
+					if($k=='w'){
+						$mod[$k] = $cookie['screenWidth'];
+					}else{
+						$mod[$k] = $cookie['screenHeight'];
+					}
+				break;
+			}
+		}
+	}
+
 	// Check if retina support is enabled and if the cookie is set, if so pretend we asked a larger image
 	if(enable_retina_support){
-		if(isset($_COOKIE['dir'])){
-			$cookie = json_decode($_COOKIE['dir']);
-			$mod['w'] *= round($cookie->pixelRatio);
-			$mod['h'] *= round($cookie->pixelRatio);
-			unset($cookie); // Cleanup
-		}
+		$mod['w'] *= round($cookie['pixelRatio']);
+		$mod['h'] *= round($cookie['pixelRatio']);
 	}
 
 	// Make sure the mod resize type is there, if not them make it the default
@@ -237,13 +266,16 @@ if(isset($mod)){
 // Check if the image is there, if not then it failed to save it, have it error and exit out.
 if(!is_file($image)){
 	echo 'Unable to find the cached image copy, does the cache directory have write access?.';
+	header('HTTP/1.1 404 Not Found');
 	exit;
 }
 
 // Output all the headers and image data
-header("Last-Modified: ".gmdate("D, d M Y H:i:s",$img['modified'])." GMT");
-header("Etag: ".$img['mime']);
-header('Cache-Control: public');
+if(show_debug!=false){
+	header("Last-Modified: ".gmdate("D, d M Y H:i:s",max($img['modified'],$cookie['lastPixelRatioUpdate']))." GMT");
+	header("Etag: ".$img['mime']);
+	header('Cache-Control: public');
+}
 
 // Show the debug information if definition set, this prevents the image form loading.
 if(show_debug){
@@ -254,14 +286,17 @@ if(show_debug){
 	echo 'mod: '.print_r($mod,true);
 	echo 'cached_path: '.$cached_path.'<br/>';
 	echo 'cached_found: '.(is_file($cached_path)?'yes':'no').'<br/>';
-	echo 'resize: '.@print_r($resize,true);
+	echo 'resize: '.@print_r($resize,true).'<br/>';
+	echo 'cookie: '.print_r($cookie,true);
 	exit;
 }
+
 // Output the 304 header or the actual image.
-if(@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])==$img['modified'] || @trim($_SERVER['HTTP_IF_NONE_MATCH'])==$img['mime']){
+if(@ (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])==$img['modified'] || @trim($_SERVER['HTTP_IF_NONE_MATCH'])==$img['mime']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])<=$cookie['lastPixelRatioUpdate'] ){
    header("HTTP/1.1 304 Not Modified");
    exit;
 }
+
 header('Content-Type: '.$img['mime']);
 readfile($image);
 // Goodbye, and that you for using the Directory Image Resizer

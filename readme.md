@@ -58,6 +58,11 @@ The formatting for the pseudo directory is `desired_width` x `desired_height``re
 - **`n`** : Nearest - Scales the image so that it fits within the desired dimensions, but does not add any padding to the image, so only the width or height will be exactly the desired dimensions (unless the ratio is the same).
 - **`c`** : Crop - The default method, this will resize the image to fit as much as possible in the desired dimensions, keeping the center intact and trimming excess as needed.
 
+In the `desired_width` and `desired_height` values in the pseudo directory you may also use the following code letters.
+
+- **`a`** : Auto - The width or height of the image.
+- **`f`** : Fullscreen - The horizontal or verticaly resultion of the users screen (the resultion of the users _screen_, not viewport). 
+
 ## Output
 The `_resizer.php` script will save a copy of the resized image locally before outputting it to the browser. The local file will be used for subsequent calls to that image unless the image has been changed (checked with mfiletime and/or md5 depending on whether the image is remote or local). This local file will be located in the specified `cache_directory` and can be cleared at any time.
 
@@ -67,7 +72,15 @@ If an image fails to load opening just the image in a new tab may give an error 
 
 For further support leave a GitHub issue or contact me directly at [phillip.gooch@gmail.com](mailto:phillip.gooch@gmail.com).
 
+## Notes
+Some browsers may not return the correct pixel ratio when requested, for example Chrome on Mac OSX return a pixel ratioof 2 even when the display is scaled (and the real value should be less). I can't see a way to avoid this, however whenever I've noticed it it has always errored on the side of having a larger, more detailed version of the image that needed. If anybody has a simple and efficient way of detecting the proper ratio please drop it in an issue so it can be implemented.
+
 ## Version History
+#### 1.4.3
+- Fixed an issue where switching pixel ratio (like when moving between a HiDPI screen and a normal one) would not be reflected in the images (a pre-switch version would still be loaded).
+- Added support for the "a" tag in the resizing pseudo directory to use the image width or height
+- Added support for the "f" tag in the resizing pesudo directory to use the users screen resultion width or height.
+
 #### 1.3.3
 - Fixed a bug that would cause the script to not load cached files even when they were available.
 - Added the option to override the default saving system and always save as a JPEG.
